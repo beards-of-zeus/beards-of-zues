@@ -19,7 +19,7 @@ var User = db.define('Users', {
   }
 });
 
-var Activity = db.define("Activity", {
+var Activity = db.define('Activity', {
   title: {
     type: Sequelize.STRING,
     notEmpty: true,
@@ -44,10 +44,15 @@ var Activity = db.define("Activity", {
 Activity.belongsToMany(User, {through: 'UserActivity'});
 User.belongsToMany(Activity, {through: 'UserActivity'});
 
-User.sync().success(function(){
-  console.log("User table created!");
+User.sync().success(function () {
+  console.log('User table created!');
 });
-Activity.sync().success(function(){
-  console.log("Activity table created!");
+Activity.sync().success(function () {
+  console.log('Activity table created!');
 });
+
 db.sync();
+
+// add export modules
+module.exports = User;
+module.exports = Activity;
