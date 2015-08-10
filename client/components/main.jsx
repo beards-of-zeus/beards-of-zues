@@ -4,6 +4,8 @@ var User = require('./user.jsx');
 var Activities = require('./activities.jsx');
 var AdSpace = require('./adspace.jsx');
 var Footer = require('./footer.jsx');
+var Create = require('./createActivity.jsx');
+var ToggleForm = require('./toggleForm.jsx');
 
 module.exports = React.createClass({
   displayName : 'Main',
@@ -26,10 +28,14 @@ module.exports = React.createClass({
           </div>
            
           <div className="large-6 columns">
+            {/*load add activity here using toggle; 
+            add and remove class hitting a button*/}
             <Activities activities={activityArray} />
           </div>  
 
           <aside className="large-3 columns hide-for-small">
+          {/*Placeholder button */}
+            <ToggleForm />
             <AdSpace />
           </aside>
         </div>

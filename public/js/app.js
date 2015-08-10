@@ -59,7 +59,7 @@
 	'use strict';
 
 	var LoggedIn = __webpack_require__(2);
-	var Home = __webpack_require__(10);
+	var Home = __webpack_require__(12);
 	module.exports = React.createClass({
 	  displayName: 'App',
 	  componentWillMount: function componentWillMount() {
@@ -179,6 +179,8 @@
 	var Activities = __webpack_require__(6);
 	var AdSpace = __webpack_require__(8);
 	var Footer = __webpack_require__(9);
+	var Create = __webpack_require__(10);
+	var ToggleForm = __webpack_require__(11);
 
 	module.exports = React.createClass({
 	  displayName: 'Main',
@@ -206,6 +208,7 @@
 	        React.createElement(
 	          'aside',
 	          { className: 'large-3 columns hide-for-small' },
+	          React.createElement(ToggleForm, null),
 	          React.createElement(AdSpace, null)
 	        )
 	      ),
@@ -215,6 +218,8 @@
 	});
 
 	// React.render(<Main />, document.getElementsByTagName('Main')[0]);
+	/*load add activity here using toggle; 
+	add and remove class hitting a button*/ /*Placeholder button */
 
 /***/ },
 /* 4 */
@@ -565,6 +570,94 @@
 
 /***/ },
 /* 10 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = React.createClass({
+	  displayName: 'CreateActivity',
+	  render: function render() {
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(
+	        "h3",
+	        null,
+	        "Create Your Activity"
+	      ),
+	      React.createElement(
+	        "form",
+	        null,
+	        React.createElement(
+	          "label",
+	          null,
+	          "Title: "
+	        ),
+	        React.createElement("input", { type: "text", name: "title" }),
+	        React.createElement(
+	          "label",
+	          null,
+	          "Description: "
+	        ),
+	        React.createElement("textarea", { name: "description" }),
+	        React.createElement(
+	          "label",
+	          null,
+	          "Location: "
+	        ),
+	        React.createElement("input", { type: "text", name: "location" }),
+	        React.createElement(
+	          "label",
+	          null,
+	          "Keywords: "
+	        ),
+	        React.createElement("input", { type: "text", name: "keywords" }),
+	        React.createElement(
+	          "button",
+	          null,
+	          "Submit"
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Create = __webpack_require__(10);
+	module.exports = React.createClass({
+	  displayName: 'ToggleForm',
+	  getInitialState: function getInitialState() {
+	    return {
+	      showForm: false
+	    };
+	  },
+	  onClick: function onClick() {
+	    this.setState({
+	      showForm: !this.state.showForm
+	    });
+	    console.log(this.state.showForm);
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'button',
+	        { onClick: this.onClick },
+	        this.state.showForm ? 'Cancel' : 'Add an Activity'
+	      ),
+	      this.state.showForm ? React.createElement(Create, null) : null
+	    );
+	  }
+	});
+
+/***/ },
+/* 12 */
 /***/ function(module, exports) {
 
 	"use strict";
