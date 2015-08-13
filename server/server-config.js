@@ -48,12 +48,13 @@ app.post('/data/activities', function(req, res){
       title: req.body.title,
       description: req.body.description,
       location: req.body.location,
-      keywords: req.body.keywords
+      keywords: req.body.keywords,
+      active: true
     })
     .save()
     .then(function(activity){
       if(user)
-        user.addActivity(activity);
+        user.addActivity(activity); // links user to activity in junction table
     });
   });
   res.redirect('/');
@@ -88,3 +89,45 @@ app.get('/data/activities', function(req, res){
     }, []); //reduce
   });//then(function(activities))
 });//app.get
+
+app.get('/data/userActivities', function(req, res){
+  'use strict';
+  var iterations = 0;
+  Activity.findAll({})
+  .then(function(activities){
+    activities.reduce(function(list, activity){ 
+      activity.getUsers({
+        where : {
+          userId : req.query.userID //userId
+        }//where
+      })//getUsers
+      .then(function(user){
+        if(user.length > 0){
+          list.push({id: activity.id, avatar: user[0].picture, 
+            user: user[0].name, description: activity.description, title: activity.title,
+            keywords: activity.keywords, location: activity.location});
+          iterations++;
+        }else{
+          iterations++;
+        }
+        if(iterations === activities.length)
+          { res.send(list); }
+      }); //then(function(user))
+      return list;
+    }, []); //reduce
+  });//then(function(activities))
+});//app.get
+
+app.post('/data/toggle', function(req, res){
+  'use strict';
+  console.log(req.body.activityId);
+  Activity.find({
+    where: {
+      id: req.body.activityId
+    }
+  })
+  .then(function(activity){
+    activity.updateAttributes({active: !activity.get('active')});
+  })
+  res.sendStatus(200);
+});

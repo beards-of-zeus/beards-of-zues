@@ -1,0 +1,16 @@
+{
+  "name": "Tagalong-Club",
+  "version": "0.0.0",
+  "homepage": "http://www.tagalong.club",
+  "authors": [],
+  "description": "Site to gather interested parties on projects",
+  "main": "client/index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

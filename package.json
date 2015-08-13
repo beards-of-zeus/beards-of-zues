@@ -36,5 +36,7 @@
     "react": "^0.13.3",
     "sequelize": "~3.4.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack": "^1.11.0"
+  }
 }

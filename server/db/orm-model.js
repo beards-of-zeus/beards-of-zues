@@ -32,6 +32,9 @@ module.exports = function(){
     },
     keywords: {
       type: Sequelize.STRING
+    },
+    active: {
+      type: Sequelize.BOOLEAN
     }
     //sequelize automatically makes createdAt and updatedAt columns
   });
@@ -40,7 +43,8 @@ module.exports = function(){
   // Use a method to set relationships
   Activity.belongsToMany(User, {through: 'UserActivity'});
   User.belongsToMany(Activity, {through: 'UserActivity'});
-
+  //Activity.hasOne(User, {as: "Owner"});
+  
   // User.sync().success(function () {
   //   console.log('User table created!');
   // });
